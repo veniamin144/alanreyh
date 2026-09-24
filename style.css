@@ -1,0 +1,317 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #1e3c72 0%, #2a5298 35%, #f7b733 100%);
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Небо и облака */
+.sky {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 50px;
+    filter: blur(1px);
+    animation: drift linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 60%;
+    height: 140%;
+    top: -60%;
+    left: 15%;
+}
+
+.cloud::after {
+    width: 45%;
+    height: 120%;
+    top: -40%;
+    right: 10%;
+}
+
+@keyframes drift {
+    from { transform: translateX(-30vw); }
+    to   { transform: translateX(130vw); }
+}
+
+/* Самолёт */
+.plane {
+    position: fixed;
+    font-size: 2.5rem;
+    top: 15%;
+    left: -10%;
+    z-index: 1;
+    animation: fly 18s linear infinite;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+}
+
+@keyframes fly {
+    0%   { left: -10%; top: 20%; transform: rotate(8deg); }
+    50%  { top: 12%; }
+    100% { left: 110%; top: 18%; transform: rotate(8deg); }
+}
+
+/* Основной контент */
+.container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 30px 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    padding: 40px 35px;
+    max-width: 640px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    animation: fadeUp 1s ease both;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Итальянский флаг */
+.flag-stripe {
+    display: flex;
+    width: 90px;
+    height: 12px;
+    margin: 0 auto 25px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.flag-stripe span {
+    flex: 1;
+}
+
+.flag-stripe span:nth-child(1) { background: #009246; }
+.flag-stripe span:nth-child(2) { background: #ffffff; }
+.flag-stripe span:nth-child(3) { background: #ce2b37; }
+
+/* Заголовок */
+.title {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+}
+
+.title .name {
+    background: linear-gradient(90deg, #009246, #ffffff, #ce2b37);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    padding: 0 4px;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    opacity: 0.9;
+    margin-bottom: 25px;
+    font-style: italic;
+}
+
+/* Сообщение */
+.message {
+    text-align: left;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 16px;
+    padding: 22px 24px;
+    margin-bottom: 28px;
+}
+
+.message p {
+    margin-bottom: 12px;
+}
+
+.message p:last-child {
+    margin-bottom: 0;
+}
+
+.wish {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #ffe08a;
+}
+
+.signature {
+    text-align: right;
+    font-style: italic;
+    opacity: 0.9;
+}
+
+/* Кнопка */
+.btn {
+    background: linear-gradient(135deg, #009246, #ce2b37);
+    color: #fff;
+    border: none;
+    padding: 15px 38px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 20px rgba(206, 43, 55, 0.45);
+    letter-spacing: 0.5px;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 28px rgba(206, 43, 55, 0.65);
+}
+
+.btn:active {
+    transform: translateY(-1px) scale(0.99);
+}
+
+.counter {
+    margin-top: 18px;
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+.counter span {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #ffe08a;
+}
+
+/* Конфетти */
+.confetti {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -20px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh) rotate(720deg);
+        opacity: 0.9;
+    }
+}
+
+/* Футер */
+.footer {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 20px;
+    font-size: 1rem;
+    opacity: 0.9;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Мобильная адаптация */
+@media (max-width: 480px) {
+    .card {
+        padding: 30px 20px;
+        border-radius: 18px;
+    }
+
+    .message {
+        padding: 18px;
+        font-size: 0.98rem;
+    }
+
+    .plane {
+        font-size: 1.8rem;
+    }
+}
+
+/* Кнопка перехода на страницу с поздравлениями */
+.btn-next {
+    display: block;
+    margin: 18px auto 0;
+    background: linear-gradient(135deg, #f7b733, #ff6b6b);
+    box-shadow: 0 8px 20px rgba(247, 183, 51, 0.5);
+}
+
+.btn-next:hover {
+    box-shadow: 0 12px 28px rgba(247, 183, 51, 0.7);
+}
+
+/* ===== Изображение на первой странице ===== */
+.main-image {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto 28px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.main-image:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.6);
+}
+
+.main-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4 / 3; /* можно поменять: 1/1 — квадрат, 16/9 — широкое */
+}
+
+/* Мобильная адаптация */
+@media (max-width: 480px) {
+    .main-image {
+        max-width: 100%;
+        margin-bottom: 22px;
+        border-radius: 14px;
+    }
+}
